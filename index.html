@@ -253,9 +253,12 @@ p{margin:0}
 .notify select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5l4 4 4-4' fill='none' stroke='%234d515a' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
 .notify input:focus,.notify select:focus{outline:none;border-color:var(--ink)}
 .notify input[aria-invalid="true"]{border-color:#c0392b}
-.notify .btn{min-height:48px}
+.notify .btn{min-height:48px;justify-self:start}
 .notify-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .notify-note{grid-column:1 / -1;font-size:15px;color:var(--ink-3);margin-top:2px}
+.notify-work{grid-column:1 / -1;display:grid;gap:12px}
+.notify-work[hidden]{display:none}
+.notify input[type=file]{padding:10px 12px;font-size:15px}
 .notify-note.is-ok{color:var(--ink)}
 .notify-note.is-err{color:#c0392b}
 .tag-link{color:var(--blue-ink)}
@@ -339,7 +342,7 @@ p{margin:0}
       <a href="#does">What it does</a>
       <a href="#tech">Technology</a>
     </nav>
-    <a class="btn btn-solid nav-cta" href="#pilot">Keep me posted</a>
+    <a class="btn btn-solid nav-cta" href="#pilot">Get involved</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
@@ -350,9 +353,9 @@ p{margin:0}
   <div class="wrap hero-in">
     <div class="hero-copy">
       <h1><span class="acr">A</span> <span class="acr">h</span>ome <span class="acr">a</span>ssistive<br><span class="acr">Ro</span>bot<br>you can teach.</h1>
-      <p class="lede">Teach AhaRo tasks in your own home by talking, showing, or pointing. When it is unsure, it asks before acting, and it remembers what you teach it.</p>
+      <p class="lede">Teach AhaRo skills and routines in your own home by talking, showing, or pointing. When it is unsure, it asks before acting, and it remembers what you teach it.</p>
       <div class="cta-row">
-        <a class="btn btn-solid" href="#pilot">Keep me posted</a>
+        <a class="btn btn-solid" href="#pilot">Get involved</a>
         <a class="btn btn-ghost" href="#teaching">How teaching works</a>
       </div>
       <ul class="facts" aria-label="At a glance">
@@ -640,13 +643,25 @@ p{margin:0}
               <option value="family">caring for a relative</option>
               <option value="pets-plants">living with pets and plants</option>
               <option value="care-provider">a care home or home-care team</option>
-              <option value="investor-partner">an investor or partner</option>
+              <option value="investor">an investor</option>
+              <option value="hardware-partner">a hardware partner</option>
+              <option value="work-with-us">looking to work with you</option>
               <option value="curious" selected>curious, keep me posted</option>
             </select>
           </label>
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="notify-hp" aria-hidden="true">
-          <button class="btn btn-solid" type="submit">Keep me posted</button>
-          <p class="notify-note" id="notify-note" aria-live="polite">One email when there is something to show. No newsletter.</p>
+          <div class="notify-work" id="notify-work" hidden>
+            <label class="notify-field">
+              <span class="notify-label">Link to your CV, LinkedIn or portfolio</span>
+              <input type="url" name="link" id="notify-link" inputmode="url" placeholder="https://">
+            </label>
+            <label class="notify-field">
+              <span class="notify-label">Or upload your CV (PDF, up to 5 MB)</span>
+              <input type="file" name="cv" id="notify-cv" accept="application/pdf">
+            </label>
+          </div>
+          <button class="btn btn-solid" type="submit">Get involved</button>
+          <p class="notify-note" id="notify-note" aria-live="polite">We write only when there is something real to show, or when you can help.</p>
         </form>
       </div>
       <figure class="side"><img src="img/side.webp" width="1000" height="1100" alt="Side view of AhaRo with both arms folded forward"></figure>
@@ -743,7 +758,10 @@ p{margin:0}
   var FORM_ENDPOINT='https://formspree.io/f/mzdkozzw';   // same Formspree form as intellectusagens.com
   var form=document.getElementById('notify'), emailEl=document.getElementById('notify-email'), tagEl=document.getElementById('notify-tag'), note=document.getElementById('notify-note');
   var noteDefault=note.textContent;
-  function setTag(tag){ if(!tag) return; for(var i=0;i<tagEl.options.length;i++){ if(tagEl.options[i].value===tag){ tagEl.selectedIndex=i; break; } } }
+  var workBox=document.getElementById('notify-work');
+  function syncWork(){ workBox.hidden = tagEl.value!=='work-with-us'; }
+  tagEl.addEventListener('change',syncWork); syncWork();
+  function setTag(tag){ if(!tag) return; for(var i=0;i<tagEl.options.length;i++){ if(tagEl.options[i].value===tag){ tagEl.selectedIndex=i; break; } } syncWork(); }
   document.querySelectorAll('a[data-tag]').forEach(function(a){
     a.addEventListener('click',function(){ setTag(a.dataset.tag); setTimeout(function(){ emailEl.focus({preventScroll:true}); },400); });
   });
@@ -757,8 +775,13 @@ p{margin:0}
     }
     var btn=form.querySelector('button[type=submit]'); btn.disabled=true; note.textContent='Sending...'; note.className='notify-note';
     var data=new FormData(); data.append('email',email); data.append('tag',tag); data.append('site','aharo.bot'); data.append('_subject','AhaRo: '+tag); data.append('_gotcha',form.querySelector('[name=_gotcha]').value);
+    if(tag==='work-with-us'){
+      var link=document.getElementById('notify-link').value.trim(); var cv=document.getElementById('notify-cv').files[0];
+      if(link) data.append('link',link);
+      if(cv){ if(cv.size>5*1024*1024){ note.textContent='The CV is larger than 5 MB. Please send a smaller file or a link.'; note.className='notify-note is-err'; return; } data.append('cv',cv,cv.name); }
+    }
     fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:data})
-      .then(function(r){ if(!r.ok) throw new Error(); note.textContent='Thanks. We will write when there is something to show.'; note.className='notify-note is-ok'; form.reset(); })
+      .then(function(r){ if(!r.ok) throw new Error(); note.textContent= tag==='work-with-us' ? 'Thanks. We will read it and get back to you.' : 'Thanks. We will write when there is something to show.'; note.className='notify-note is-ok'; form.reset(); syncWork(); })
       .catch(function(){ note.textContent='That did not go through. Please try again in a moment.'; note.className='notify-note is-err'; })
       .then(function(){ btn.disabled=false; });
   });
