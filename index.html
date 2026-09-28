@@ -740,7 +740,7 @@ p{margin:0}
   });
 
   // Notify form: posts to a form service; falls back to email until an endpoint is set
-  var FORM_ENDPOINT='';   // paste your Formspree (or similar) endpoint here, e.g. 'https://formspree.io/f/abcd1234'
+  var FORM_ENDPOINT='https://formspree.io/f/mzdkozzw';   // same Formspree form as intellectusagens.com
   var form=document.getElementById('notify'), emailEl=document.getElementById('notify-email'), tagEl=document.getElementById('notify-tag'), note=document.getElementById('notify-note');
   var noteDefault=note.textContent;
   function setTag(tag){ if(!tag) return; for(var i=0;i<tagEl.options.length;i++){ if(tagEl.options[i].value===tag){ tagEl.selectedIndex=i; break; } } }
@@ -756,7 +756,8 @@ p{margin:0}
       note.textContent='The list is not connected yet. Please try again in a few days.'; note.className='notify-note is-err'; return;
     }
     var btn=form.querySelector('button[type=submit]'); btn.disabled=true; note.textContent='Sending...'; note.className='notify-note';
-    fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email:email,tag:tag,_subject:'AhaRo: '+tag,_gotcha:form.querySelector('[name=_gotcha]').value})})
+    var data=new FormData(); data.append('email',email); data.append('tag',tag); data.append('site','aharo.bot'); data.append('_subject','AhaRo: '+tag); data.append('_gotcha',form.querySelector('[name=_gotcha]').value);
+    fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:data})
       .then(function(r){ if(!r.ok) throw new Error(); note.textContent='Thanks. We will write when there is something to show.'; note.className='notify-note is-ok'; form.reset(); })
       .catch(function(){ note.textContent='That did not go through. Please try again in a moment.'; note.className='notify-note is-err'; })
       .then(function(){ btn.disabled=false; });
