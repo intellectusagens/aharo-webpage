@@ -258,7 +258,6 @@ p{margin:0}
 .notify-note{grid-column:1 / -1;font-size:15px;color:var(--ink-3);margin-top:2px}
 .notify-work{grid-column:1 / -1;display:grid;gap:12px}
 .notify-work[hidden]{display:none}
-.notify input[type=file]{padding:10px 12px;font-size:15px}
 .notify-note.is-ok{color:var(--ink)}
 .notify-note.is-err{color:#c0392b}
 .tag-link{color:var(--blue-ink)}
@@ -652,12 +651,8 @@ p{margin:0}
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="notify-hp" aria-hidden="true">
           <div class="notify-work" id="notify-work" hidden>
             <label class="notify-field">
-              <span class="notify-label">Link to your CV, LinkedIn or portfolio</span>
-              <input type="url" name="link" id="notify-link" inputmode="url" placeholder="https://">
-            </label>
-            <label class="notify-field">
-              <span class="notify-label">Or upload your CV (PDF, up to 5 MB)</span>
-              <input type="file" name="cv" id="notify-cv" accept="application/pdf">
+              <span class="notify-label">Your LinkedIn, GitHub or website</span>
+              <input type="url" name="link" id="notify-link" inputmode="url" placeholder="https://" autocomplete="url">
             </label>
           </div>
           <button class="btn btn-solid" type="submit">Get involved</button>
@@ -770,16 +765,17 @@ p{margin:0}
     var email=emailEl.value.trim(), tag=tagEl.value;
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ emailEl.setAttribute('aria-invalid','true'); note.textContent='Please enter a valid email address.'; note.className='notify-note is-err'; emailEl.focus(); return; }
     emailEl.removeAttribute('aria-invalid');
+    var link='';
+    if(tag==='work-with-us'){
+      link=document.getElementById('notify-link').value.trim();
+      if(!/^https?:\/\/\S+$/.test(link)){ note.textContent='Please add a link to your LinkedIn, GitHub or website.'; note.className='notify-note is-err'; document.getElementById('notify-link').focus(); return; }
+    }
     if(!FORM_ENDPOINT){
       note.textContent='The list is not connected yet. Please try again in a few days.'; note.className='notify-note is-err'; return;
     }
     var btn=form.querySelector('button[type=submit]'); btn.disabled=true; note.textContent='Sending...'; note.className='notify-note';
     var data=new FormData(); data.append('email',email); data.append('tag',tag); data.append('site','aharo.bot'); data.append('_subject','AhaRo: '+tag); data.append('_gotcha',form.querySelector('[name=_gotcha]').value);
-    if(tag==='work-with-us'){
-      var link=document.getElementById('notify-link').value.trim(); var cv=document.getElementById('notify-cv').files[0];
-      if(link) data.append('link',link);
-      if(cv){ if(cv.size>5*1024*1024){ note.textContent='The CV is larger than 5 MB. Please send a smaller file or a link.'; note.className='notify-note is-err'; return; } data.append('cv',cv,cv.name); }
-    }
+    if(tag==='work-with-us'){ data.append('link',link); }
     fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:data})
       .then(function(r){ if(!r.ok) throw new Error(); note.textContent= tag==='work-with-us' ? 'Thanks. We will read it and get back to you.' : 'Thanks. We will write when there is something to show.'; note.className='notify-note is-ok'; form.reset(); syncWork(); })
       .catch(function(){ note.textContent='That did not go through. Please try again in a moment.'; note.className='notify-note is-err'; })
