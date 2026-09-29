@@ -6,7 +6,7 @@
 <title>AhaRo, a home assistive robot you can teach</title>
 <meta name="description" content="AhaRo is a home assistive robot you can teach, by Intellectus Agens, Vienna. Say what you want, show it, or point. When unsure, it asks. Then it remembers.">
 <meta property="og:title" content="AhaRo, a home assistive robot you can teach">
-<meta property="og:description" content="A home robot you can teach in plain language. It asks when unsure, remembers, and combines what it has learned. Built in Vienna by Intellectus Agens.">
+<meta property="og:description" content="A home robot you can teach in plain language. It asks when unsure, remembers, and combines what it has learned. Developed in Vienna by Intellectus Agens.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aharo.bot/">
 <meta property="og:image" content="https://aharo.bot/og.png">
@@ -222,8 +222,9 @@ p{margin:0}
 .shift .from .gloss{color:#7d818a}
 .shift-arrow{width:56px;height:56px;color:var(--blue-dark);margin-top:64px}
 .tech-body{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);margin-top:72px}
-.tech-body p{color:var(--on-dark-2);font-size:18px;line-height:1.6}
-.safe{border-top:1px solid var(--on-dark);padding-top:14px}
+.tech-body p{color:var(--on-dark-2);font-size:17px;line-height:1.6}
+.safe{border-top:1px solid var(--on-dark);padding:14px 0 22px}
+.safe + .safe{border-top-color:#3a3d46}
 .safe h3{font-size:24px;color:var(--on-dark)}
 .safe p{padding-top:10px;font-size:17px}
 .research{margin-top:72px}
@@ -336,7 +337,7 @@ p{margin:0}
       <span class="brand-name">AhaRo</span>
     </a>
     <nav class="menu" id="menu" aria-label="Site sections">
-      <a href="#teaching">Teaching</a>
+      <a href="#teaching">Teach it</a>
       <a href="#robot">The robot</a>
       <a href="#does">What it does</a>
       <a href="#tech">Technology</a>
@@ -360,7 +361,7 @@ p{margin:0}
       <ul class="facts" aria-label="At a glance">
         <li>A little bigger than a robot vacuum</li>
         <li>Weighs less than a toddler</li>
-        <li>Built in Vienna by Intellectus Agens</li>
+        <li>Developed in Vienna by Intellectus Agens</li>
       </ul>
     </div>
     <figure class="hero-fig">
@@ -548,7 +549,7 @@ p{margin:0}
     <ul class="ways">
       <li class="rv">
         <h3><button class="rv-head" type="button" aria-expanded="false">Living on your own<span class="rv-plus" aria-hidden="true"></span></button></h3>
-        <div class="rv-body"><p>An extra pair of hands for reaching, carrying and remembering, without giving up your own place. Some households try AhaRo remotely; a few host it at home with our engineers alongside. <a href="#pilot" class="tag-link" data-tag="household">Leave your email</a></p></div>
+        <div class="rv-body"><p>An extra pair of hands for reaching, carrying and remembering, without giving up your own place. In the first pilots, some households will try AhaRo remotely and a few will host it at home, with our engineers alongside. <a href="#pilot" class="tag-link" data-tag="household">Leave your email</a></p></div>
       </li>
       <li class="rv">
         <h3><button class="rv-head" type="button" aria-expanded="false">Families caring for a relative<span class="rv-plus" aria-hidden="true"></span></button></h3>
@@ -556,11 +557,11 @@ p{margin:0}
       </li>
       <li class="rv">
         <h3><button class="rv-head" type="button" aria-expanded="false">Living with pets and plants<span class="rv-plus" aria-hidden="true"></span></button></h3>
-        <div class="rv-body"><p>Bowl filled, ball thrown, plants watered, on schedule, and the home looked after while you are away. A good first case to try remotely. <a href="#pilot" class="tag-link" data-tag="pets-plants">Leave your email</a></p></div>
+        <div class="rv-body"><p>Bowl filled, ball thrown, plants watered, on schedule, and the home looked after while you are away. A good first case for a remote trial. <a href="#pilot" class="tag-link" data-tag="pets-plants">Leave your email</a></p></div>
       </li>
       <li class="rv">
         <h3><button class="rv-head" type="button" aria-expanded="false">Care homes and home-care services<span class="rv-plus" aria-hidden="true"></span></button></h3>
-        <div class="rv-body"><p>Taught once per resident's room and routine; takes the small errands off staff rounds. A few providers in Vienna run AhaRo in a resident's room or on a care round, with our team on site. <a href="#pilot" class="tag-link" data-tag="care-provider">Leave your email</a></p></div>
+        <div class="rv-body"><p>Taught once per resident's room and routine; takes the small errands off staff rounds. We are looking for a few providers in Vienna to run AhaRo in a resident's room or on a care round, with our team on site. <a href="#pilot" class="tag-link" data-tag="care-provider">Leave your email</a></p></div>
       </li>
     </ul>
   </div>
@@ -583,10 +584,25 @@ p{margin:0}
       </div>
     </div>
     <div class="tech-body">
-      <p>A hybrid cognitive architecture, neuro-symbolic in research terms: learned skills for the physical world, a step-by-step planner that chains them into longer sequences, and a memory of your home. The memory holds where things are, how they work and how you like them handled.</p>
-      <div class="safe">
-        <h3>How it stays safe</h3>
-        <p>Every skill knows how confident it is. Below its confidence threshold AhaRo stops and asks you, or someone you trust, from wherever they are. It does not finish a task it is unsure about on its own.</p>
+      <div>
+        <div class="safe">
+          <h3>How it thinks</h3>
+          <p>A hybrid cognitive architecture, neuro-symbolic in research terms: learned skills for the physical world, a step-by-step planner that chains them into longer sequences, and a memory of your home. The memory holds where things are, how they work and how you like them handled.</p>
+        </div>
+        <div class="safe">
+          <h3>How it works with humans</h3>
+          <p>An autonomy arbitration layer decides, moment by moment, who holds control: the robot, you, or a trusted person connected remotely. Speech and gestures run both ways. It announces what it is doing, pauses for confirmation below the acceptable threshold, and offers help when it recognises a routine. It learns your preferences from what you say and correct, occasionally asks how satisfied you are, and adjusts.</p>
+        </div>
+      </div>
+      <div>
+        <div class="safe">
+          <h3>How it stays safe</h3>
+          <p>Every skill carries a calibrated confidence estimate; below the acceptable threshold AhaRo stops and asks you or a trusted person. Alongside learned skills it keeps symbolic safety rules and a model of acceptable behaviour, preprogrammed and extendable through corrections by a responsible user: rooms it must not enter, hours it must stay put, objects it must never touch. Every plan is checked against them before execution.</p>
+        </div>
+        <div class="safe">
+          <h3>How it keeps your privacy</h3>
+          <p>Locally hosted AI: the models run on the robot, and what it learns about your home stays there. Only selected, anonymised data leaves the house, with your consent; sharing with a relative or carer is limited to the people you choose. The information flow is transparent: you can see what it has learned, remembers and shares.</p>
+        </div>
       </div>
     </div>
     <div class="research">
@@ -629,7 +645,7 @@ p{margin:0}
     <div class="pilot-in">
       <div>
         <h2>Pilot with us.</h2>
-        <p class="intro">AhaRo is not for sale yet. Intellectus Agens is shaping it with pioneer customers in Vienna, around real homes and routines. Status: working prototype, first pilots in preparation with care providers.</p>
+        <p class="intro">AhaRo is not for sale yet. Intellectus Agens will shape it with pioneer customers in Vienna, around real homes and routines. Status: working prototype, first pilots in preparation.</p>
         <form class="notify" id="notify" novalidate>
           <label class="notify-field">
             <span class="notify-label">Your email</span>
@@ -674,7 +690,7 @@ p{margin:0}
     </div>
     <div class="foot-right">
       <div class="foot-links">
-        <a href="#teaching">Teaching</a>
+        <a href="#teaching">Teach it</a>
         <a href="#robot">The robot</a>
         <a href="#does">What it does</a>
         <a href="#tech">Technology</a>
