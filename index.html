@@ -13,8 +13,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="brand/favicon.png">
-<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="brand/favicon-solid.png?v=2">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@ a:hover{color:var(--blue)}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
 h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-0.005em}
 h1{font-size:clamp(40px,5.6vw,76px);line-height:1.04}
-.acr{text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:.04em;text-underline-offset:.07em}
+.acr{text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:.04em;text-underline-offset:.07em;text-decoration-skip-ink:none}
 h2{font-size:clamp(34px,4.4vw,58px);line-height:1.08}
 h3{font-size:clamp(22px,2.2vw,28px);line-height:1.2}
 p{margin:0}
@@ -81,16 +81,16 @@ p{margin:0}
 .menu-btn{display:none;margin-left:auto;background:none;border:1.5px solid var(--line-2);border-radius:8px;min-height:42px;padding:0 14px;font:500 16px var(--sans);color:var(--ink);cursor:pointer}
 
 /* Hero */
-.hero{padding:clamp(24px,4vh,56px) 0 clamp(20px,3vh,40px)}
-.hero-in{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(24px,4vw,64px);min-height:min(calc(100vh - var(--nav-h) - 96px),720px)}
-.hero-copy{padding:24px 0}
+.hero{padding:clamp(16px,3vh,40px) 0 clamp(16px,2vh,28px)}
+.hero-in{display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:0 clamp(24px,4vw,64px);min-height:0}
+.hero-copy{padding:16px 0 30px;align-self:end}
 .hero h1{max-width:none;white-space:nowrap}
 .lede{font-size:clamp(19px,1.7vw,23px);line-height:1.5;color:var(--ink-2);max-width:29em;margin-top:28px}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.facts{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px 20px;max-width:34em}
-.facts li{border-top:1px solid var(--line-2);padding-top:10px;font-size:15px;color:var(--ink-2);line-height:1.35}
-.hero-fig{margin:0;position:relative}
-.hero-fig img{width:100%;max-height:calc(100vh - var(--nav-h) - 64px);object-fit:contain;object-position:center bottom}
+.facts{grid-column:1 / -1;align-self:start;list-style:none;margin:-7px 0 0;padding:22px 0 0;position:relative;z-index:1;background:var(--paper);display:grid;grid-template-columns:repeat(3,minmax(0,170px));gap:0 40px;border-top:1px solid var(--line-2)}
+.facts li{font-size:15px;color:var(--ink-2);line-height:1.35}
+.hero-fig{margin:0;position:relative;align-self:end;line-height:0}
+.hero-fig img{width:100%;max-height:calc(100vh - var(--nav-h) - 120px);object-fit:contain;object-position:center bottom;display:block}
 @media (prefers-reduced-motion:no-preference){
   .hero-fig img{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -149,11 +149,20 @@ p{margin:0}
 .step[aria-pressed="true"] .ring{color:var(--blue)}
 
 .stage{position:sticky;top:calc(var(--nav-h) + 24px)}
-.stage-img{position:relative;aspect-ratio:1000/1100;width:min(100%,calc(78vh * 0.909));margin:0 auto}
-.stage-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .45s ease}
-.stage-img img.is-on{opacity:1}
-.stage-img .marker{position:absolute;width:11%;aspect-ratio:1;transform:translate(-50%,-50%);color:var(--blue);opacity:0;transition:opacity .35s ease .15s;pointer-events:none}
-.stage-img .marker.is-on{opacity:1}
+.stage-img{position:relative;aspect-ratio:1380/760;width:min(100%,calc(62vh * 1.816));margin:0 auto}
+.scene{display:block;width:100%;height:100%}
+.scene .ov{opacity:0;transition:opacity .35s ease}
+.scene .ov.is-on{opacity:1}
+.scene .lbl{font-family:var(--sans);font-size:22px;fill:var(--blue-ink);stroke:none}
+.scene .num{font-family:var(--sans);font-size:18px;font-weight:500;fill:var(--blue-ink);stroke:none}
+@media (prefers-reduced-motion:no-preference){
+  .scene .ov.is-on .ring{animation:ring .9s ease-out}
+  .scene .ov.is-on .dash{animation:dash 1.2s linear}
+  .scene .ov.is-on .ghost{animation:ghost .9s ease-out}
+  @keyframes ring{from{transform:scale(1.5);transform-origin:center;transform-box:fill-box;opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes dash{from{stroke-dashoffset:120}to{stroke-dashoffset:0}}
+  @keyframes ghost{from{transform:translateY(46px);transform-box:fill-box;opacity:0}to{transform:none;opacity:1}}
+}
 .stage-line{margin-top:8px;min-height:110px;font-family:var(--serif);font-size:clamp(20px,1.8vw,24px);line-height:1.35;color:var(--ink)}
 .stage-line .who{font-family:var(--sans);font-size:14px;color:var(--ink-3);display:block;margin-bottom:2px}
 .stage-line q{quotes:"\201C" "\201D"}
@@ -244,7 +253,8 @@ p{margin:0}
 /* Pilot */
 .pilot-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,80px);align-items:end}
 .pilot-in .side{margin:0}
-.pilot-in .side img{width:100%;max-height:520px;object-fit:contain;object-position:right bottom}
+.pilot-in .side svg{width:100%;height:auto;display:block}
+.pilot-in{align-items:center}
 .pilot .cta-row{margin-top:32px}
 .notify{margin-top:32px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end;max-width:34em}
 .notify .notify-field:first-child{grid-column:1 / -1}
@@ -291,14 +301,15 @@ p{margin:0}
   .menu.is-open{display:flex;flex-direction:column;gap:4px;position:absolute;left:0;right:0;top:var(--nav-h);background:var(--paper);border-bottom:1px solid var(--line);padding:12px var(--gutter) 20px}
   .menu.is-open a{padding:10px 0;font-size:18px}
   .hero-in{grid-template-columns:1fr;min-height:0}
-  .hero-copy{padding:8px 0 0;order:2}
+  .hero-copy{padding:20px 0 0;order:3}
   .hero-fig{order:1}
   .hero-fig img{max-height:62vh}
-  .facts{grid-template-columns:repeat(2,1fr);gap:16px 20px;max-width:none}
+  .facts{order:2;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 16px;margin-top:-7px;padding-top:16px}
+  .hero-copy{order:3}
   .compare{grid-template-columns:1fr;gap:40px}
   .teach-in{grid-template-columns:1fr;gap:8px}
   .stage{order:-1;position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));z-index:2;background:var(--paper);padding:8px 0 10px;border-bottom:1px solid var(--line)}
-  .stage-img{width:min(100%,calc(36vh * 0.909))}
+  .stage-img{width:min(100%,calc(30vh * 1.816))}
   .stage-line{min-height:52px;font-size:18px}
   .teach-copy{padding-top:24px}
   .anatomy{grid-template-columns:1fr;gap:32px}
@@ -311,7 +322,7 @@ p{margin:0}
   .tech-body{grid-template-columns:1fr;gap:18px}
   .papers{grid-template-columns:1fr}
   .pilot-in{grid-template-columns:1fr}
-  .pilot-in .side{display:none}
+  .pilot-in .side{order:2;margin-top:24px}
   .notify{grid-template-columns:1fr}
   .notify .btn{width:100%}
   .ways{grid-template-columns:1fr 1fr}
@@ -358,15 +369,15 @@ p{margin:0}
         <a class="btn btn-solid" href="#pilot">Get involved</a>
         <a class="btn btn-ghost" href="#teaching">How teaching works</a>
       </div>
-      <ul class="facts" aria-label="At a glance">
-        <li>A little bigger than a robot vacuum</li>
-        <li>Weighs less than a toddler</li>
-        <li>Developed in Vienna by Intellectus Agens</li>
-      </ul>
     </div>
     <figure class="hero-fig">
-      <img src="img/hero.webp" width="1000" height="1100" alt="AhaRo: a slim wheeled base, a tall column carrying two small arms with grippers, and a camera head on top. One arm reaches toward the viewer." fetchpriority="high">
+      <img src="img/hero.webp" width="1000" height="1040" alt="AhaRo: a slim wheeled base, a tall column carrying two small arms with grippers, and a camera head on top. One arm reaches forward." fetchpriority="high">
     </figure>
+    <ul class="facts" aria-label="At a glance">
+      <li>A little bigger than a robot vacuum</li>
+      <li>Weighs less than a toddler</li>
+      <li>Developed in Vienna by Intellectus Agens</li>
+    </ul>
   </div>
 </section>
 
@@ -385,10 +396,10 @@ p{margin:0}
 <section class="section why">
   <div class="wrap">
     <h2>Your robot does not need to work everywhere.<br>It needs to work at your place.</h2>
-    <p class="intro">Instead of learning a general solution, we provide a general learning method for user-specific solutions. Taught its own home and the tasks that matter to you, by the people who live there.</p>
+    <p class="intro">Instead of learning a general solution, we provide a general learning method for user-specific solutions. You teach AhaRo your home and the tasks that matter to you.</p>
     <div class="compare">
       <div class="them">
-        <h3>Generalist approach</h3>
+        <h3>Generalist robot approach</h3>
         <ul>
           <li>designed for broad environments</li>
           <li>large-scale pretraining</li>
@@ -441,15 +452,47 @@ p{margin:0}
     </div>
     <div class="stage" aria-live="polite">
       <div class="stage-img">
-        <img src="img/teach_show.webp" width="1000" height="1100" data-step="show" class="is-on" alt="AhaRo with one arm reaching out to the side, being shown a movement">
-        <img src="img/hero.webp" width="1000" height="1100" data-step="correct" alt="AhaRo with one arm reaching forward, adjusting its movement">
-        <img src="img/teach_ask.webp" width="1000" height="1100" data-step="ask" alt="AhaRo with one arm extended toward an object, asking for confirmation">
-        <img src="img/teach_trust.webp" width="1000" height="1100" data-step="trust" alt="AhaRo seen from the front, arms at rest, ready to work">
-        <img src="img/side.webp" width="1000" height="1100" data-step="reason" alt="AhaRo seen from the side, both arms extended forward in a planned motion">
-        <svg class="marker" data-step="ask" style="left:66.5%;top:31%" viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="3"/>
-          <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          <path d="M50 2v18M50 80v18M2 50h18M80 50h18" stroke="currentColor" stroke-width="3" fill="none"/>
+        <svg class="scene" viewBox="60 80 1380 760" role="img" aria-label="AhaRo in a kitchen: the robot with a line sketch of a counter, a shelf with cups and a fridge behind it; highlights change with each step">
+          <g id="scene-lines" fill="none" stroke="#9ea2ab" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".85"><path d="M178.6 584.5L1913.0 741.4M178.6 584.5L174.4 98.2M1913.0 741.4L1916.5 -90.7M117.0 603.4L730.1 665.1M730.1 665.1L753.0 636.5M753.0 636.5L178.6 584.5M178.6 584.5L117.0 603.4M115.2 403.0L729.0 413.2M729.0 413.2L752.0 406.4M752.0 406.4L177.0 398.2M177.0 398.2L115.2 403.0M117.0 603.4L115.2 403.0M730.1 665.1L729.0 413.2M753.0 636.5L752.0 406.4M178.6 584.5L177.0 398.2M112.9 396.9L728.1 405.6M728.1 405.6L752.0 399.2M218.6 602.7L217.1 415.6M329.4 613.4L328.0 417.9M450.5 625.1L449.2 420.5M583.5 637.9L582.3 423.3M164.8 496.1L165.0 521.7M271.0 502.0L271.2 528.7M387.0 508.3L387.2 536.2M514.0 515.2L514.2 544.5M653.8 522.9L653.9 553.6M1092.9 708.0L1385.0 738.0M1385.0 738.0L1337.9 689.4M1337.9 689.4L1081.9 666.2M1081.9 666.2L1092.9 708.0M1091.9 150.4L1385.2 131.8M1385.2 131.8L1337.9 156.4M1337.9 156.4L1081.0 171.1M1081.0 171.1L1091.9 150.4M1092.9 708.0L1091.9 150.4M1385.0 738.0L1385.2 131.8M1337.9 689.4L1337.9 156.4M1081.9 666.2L1081.0 171.1M1121.7 458.7L1121.4 289.5M1092.3 362.8L1385.1 362.8M329.1 288.8L627.5 280.2M303.2 287.0L611.6 277.8M329.1 288.8L303.2 287.0M627.5 280.2L611.6 277.8M350.0 286.3L374.3 285.6M374.3 285.6L383.9 286.3M383.9 286.3L359.9 287.0M359.9 287.0L350.0 286.3M349.8 260.4L374.1 259.4M374.1 259.4L383.8 260.6M383.8 260.6L359.7 261.5M359.7 261.5L349.8 260.4M350.0 286.3L349.8 260.4M374.3 285.6L374.1 259.4M383.9 286.3L383.8 260.6M359.9 287.0L359.7 261.5M411.8 284.5L437.3 283.7M437.3 283.7L446.1 284.5M446.1 284.5L420.9 285.3M420.9 285.3L411.8 284.5M411.6 258.0L437.1 257.0M437.1 257.0L446.0 258.2M446.0 258.2L420.7 259.2M420.7 259.2L411.6 258.0M411.8 284.5L411.6 258.0M437.3 283.7L437.1 257.0M446.1 284.5L446.0 258.2M420.9 285.3L420.7 259.2M476.5 282.6L503.3 281.8M503.3 281.8L511.3 282.7M511.3 282.7L484.9 283.4M484.9 283.4L476.5 282.6M476.4 255.4L503.2 254.4M503.2 254.4L511.1 255.7M511.1 255.7L484.7 256.7M484.7 256.7L476.4 255.4M476.5 282.6L476.4 255.4M503.3 281.8L503.2 254.4M511.3 282.7L511.1 255.7M484.9 283.4L484.7 256.7"/></g>
+          <g class="ov" data-step="ask" fill="none" stroke="#9ea2ab" stroke-width="2" stroke-dasharray="5 5">
+            <path d="M1232 392v10c-7 3-10 9-10 17v33h36v-33c0-8-3-14-10-17v-10z"/>
+          </g>
+          <g class="ov" data-step="reason" fill="none" stroke="#9ea2ab" stroke-width="2" stroke-dasharray="5 5">
+            <path d="M632 330v10c-7 3-10 9-10 17v33h36v-33c0-8-3-14-10-17v-10z"/>
+          </g>
+          <image id="scene-robot" href="img/kitchen-robot.png" x="186" y="118" width="1312" height="738" preserveAspectRatio="xMidYMid meet"/>
+          <g class="ov is-on" data-step="show" fill="none" stroke="#1e5eeb" stroke-width="3.5" stroke-linecap="round">
+            <path d="M1122 459L1121 290"/>
+            <path class="dash" d="M1114 476c-80 40-110 120-90 200" stroke-width="2.2" stroke-dasharray="6 6"/>
+            <path d="M1018 668l6 20l14-12z" fill="#1e5eeb" stroke="none"/>
+            <text x="1140" y="280" class="lbl">firm pull, then it swings</text>
+          </g>
+          <g class="ov" data-step="correct" fill="none" stroke="#1e5eeb" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="1101" cy="512" r="24"/>
+            <circle class="ghost" cx="1101" cy="464" r="24" stroke-dasharray="4 5"/>
+            <path d="M1148 530v-60M1140 480l8-10 8 10"/>
+            <text x="1166" y="488" class="lbl">a bit higher</text>
+          </g>
+          <g class="ov" data-step="ask" fill="none" stroke="#1e5eeb" stroke-width="2.5">
+            <path d="M952 234L1232 428" stroke-dasharray="5 6" stroke-width="1.6"/>
+            <circle class="ring" cx="1241" cy="440" r="40"/>
+            <circle cx="1241" cy="440" r="4" fill="#1e5eeb" stroke="none"/>
+            <path d="M1241 390v10M1241 480v10M1191 440h10M1281 440h10"/>
+            <text x="1241" y="520" class="lbl" text-anchor="middle">this one?</text>
+          </g>
+          <g class="ov" data-step="trust" fill="none" stroke="#1e5eeb" stroke-width="1.8">
+            <circle cx="1122" cy="380" r="4.5" fill="#1e5eeb" stroke="none"/><path d="M1122 380h22"/><text x="1152" y="387" class="lbl">fridge: firm pull</text>
+            <circle cx="430" cy="270" r="4.5" fill="#1e5eeb" stroke="none"/><path d="M430 270v-58"/><text x="430" y="200" class="lbl" text-anchor="middle">cups: on the shelf</text>
+            <circle cx="390" cy="470" r="4.5" fill="#1e5eeb" stroke="none"/><path d="M390 470v-80"/><text x="390" y="378" class="lbl" text-anchor="middle">cloth: third door</text>
+          </g>
+          <g class="ov" data-step="reason" fill="none" stroke="#1e5eeb" stroke-width="2.2">
+            <path class="dash" d="M880 770c-90 0-180-20-240-30-26-4-38-26-38-70v-200" stroke-dasharray="6 6"/>
+            <path d="M594 468l8 14l8-14z" fill="#1e5eeb" stroke="none"/>
+            <circle cx="640" cy="372" r="18" fill="#fff"/><text x="640" y="378" class="num" text-anchor="middle">1</text><text x="666" y="380" class="lbl">bottle</text>
+            <circle cx="1122" cy="470" r="18" fill="#fff"/><text x="1122" y="476" class="num" text-anchor="middle">2</text><text x="1148" y="478" class="lbl">fridge</text>
+            <path d="M1118 492c-50 40-60 110-40 170" stroke-dasharray="6 6" stroke-width="1.8"/>
+            <circle cx="1078" cy="662" r="18" fill="#fff"/><text x="1078" y="668" class="num" text-anchor="middle">3</text><text x="1104" y="670" class="lbl">door</text>
+          </g>
         </svg>
       </div>
       <div class="stage-line" id="stage-line">
@@ -675,7 +718,16 @@ p{margin:0}
           <p class="notify-note" id="notify-note" aria-live="polite">We write only when there is something real to show, or when you can help.</p>
         </form>
       </div>
-      <figure class="side"><img src="img/side.webp" width="1000" height="1100" alt="Side view of AhaRo with both arms folded forward"></figure>
+      <figure class="side">
+        <svg class="scene scene-pilot" viewBox="660 112 780 724" role="img" aria-label="AhaRo at the fridge in the sketched kitchen">
+          <use href="#scene-lines"/>
+          <use href="#scene-robot"/>
+          <g fill="none" stroke="#1e5eeb" stroke-width="2.2">
+            <circle cx="1241" cy="440" r="40"/><circle cx="1241" cy="440" r="4" fill="#1e5eeb" stroke="none"/>
+            <path d="M1241 390v10M1241 480v10M1191 440h10M1281 440h10"/>
+          </g>
+        </svg>
+      </figure>
     </div>
   </div>
 </section>
@@ -713,13 +765,11 @@ p{margin:0}
     reason:[['You, a week later','Put the milk away.'],['AhaRo','Fridge, bottle, door. Done.']]
   };
   var steps=document.querySelectorAll('#steps .step');
-  var imgs=document.querySelectorAll('.stage-img img');
-  var markers=document.querySelectorAll('.stage-img .marker');
+  var overlays=document.querySelectorAll('.scene .ov');
   var lineBox=document.getElementById('stage-line');
   function setStep(name){
     steps.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.step===name?'true':'false');});
-    imgs.forEach(function(i){i.classList.toggle('is-on', i.dataset.step===name);});
-    markers.forEach(function(m){m.classList.toggle('is-on', m.dataset.step===name);});
+    overlays.forEach(function(o){ var on=o.dataset.step.split(' ').indexOf(name)>=0; if(on){ o.classList.remove('is-on'); void o.getBoundingClientRect(); } o.classList.toggle('is-on', on); });
     lineBox.innerHTML='';
     (lines[name]||[]).forEach(function(l){
       var d=document.createElement('div'); d.className='line';
@@ -752,15 +802,15 @@ p{margin:0}
       openPart(p.dataset.part,on);
     });
   });
-  parts.forEach(function(li){
-    var h=li.querySelector('.rv-head');
-    if(h){h.addEventListener('click',function(){ var on=li.classList.contains('is-open'); bubbles.forEach(function(b){ if(b.dataset.part===li.dataset.part) b.classList.toggle('is-open', on); }); pins.forEach(function(p){ if(p.dataset.part===li.dataset.part) p.classList.toggle('is-open', on); }); });}
-  });
+
 
   // Reveal-on-tap for hidden descriptions
   document.querySelectorAll('.rv').forEach(function(item){
     var head=item.querySelector('.rv-head');
-    function toggle(){var open=item.classList.toggle('is-open'); if(head) head.setAttribute('aria-expanded', open?'true':'false');}
+    function toggle(){
+      var open=item.classList.toggle('is-open'); if(head) head.setAttribute('aria-expanded', open?'true':'false');
+      if(item.dataset.part){ document.querySelectorAll('#anatomy-fig .bubble[data-part="'+item.dataset.part+'"], #anatomy-fig .pin[data-part="'+item.dataset.part+'"]').forEach(function(b){ b.classList.toggle('is-open', open); }); }
+    }
     if(head){head.addEventListener('click',function(e){e.stopPropagation();toggle();});}
     else{item.addEventListener('click',toggle); item.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});}
   });
