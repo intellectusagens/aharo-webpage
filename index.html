@@ -6,7 +6,7 @@
 <title>AhaRo, a home assistive robot you can teach</title>
 <meta name="description" content="AhaRo is a home assistive robot you can teach, by Intellectus Agens, Vienna. Say what you want, show it, or point. When unsure, it asks. Then it remembers.">
 <meta property="og:title" content="AhaRo, a home assistive robot you can teach">
-<meta property="og:description" content="A home robot you can teach in plain language. It asks when unsure, remembers, and combines what it has learned. Developed in Vienna by Intellectus Agens.">
+<meta property="og:description" content="A home robot you can teach in plain language. It asks when unsure, remembers, and combines what it has learned. Developed in Europe by Intellectus Agens.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aharo.bot/">
 <meta property="og:image" content="https://aharo.bot/og.png">
@@ -87,8 +87,13 @@ p{margin:0}
 .hero h1{max-width:none;white-space:nowrap}
 .lede{font-size:clamp(19px,1.7vw,23px);line-height:1.5;color:var(--ink-2);max-width:29em;margin-top:28px}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.facts{grid-column:1 / -1;align-self:start;list-style:none;margin:-7px 0 0;padding:22px 0 0;position:relative;z-index:1;background:var(--paper);display:grid;grid-template-columns:repeat(3,minmax(0,170px));gap:0 40px;border-top:1px solid var(--line-2)}
+.floor{grid-column:1 / -1;align-self:start;height:1px;background:var(--line-2);margin-top:0;position:relative;z-index:1}
+.facts{grid-column:2;align-self:start;list-style:none;margin:0;padding:18px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 20px;position:relative;z-index:1;background:var(--paper);text-align:center}
 .facts li{font-size:15px;color:var(--ink-2);line-height:1.35}
+.asks{grid-column:1;align-self:start;padding:18px 0 0;position:relative;z-index:1;background:var(--paper)}
+.asks-label{display:block;font-size:14px;color:var(--ink-3);margin-bottom:8px}
+.asks ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.asks q{font-family:var(--serif);font-size:clamp(18px,1.45vw,21px);color:var(--ink);quotes:"\201C" "\201D"}
 .hero-fig{margin:0;position:relative;align-self:end;line-height:0}
 .hero-fig img{width:100%;max-height:calc(100vh - var(--nav-h) - 120px);object-fit:contain;object-position:center bottom;display:block}
 @media (prefers-reduced-motion:no-preference){
@@ -112,13 +117,6 @@ p{margin:0}
 .rv-body p,.rv-body .how,.rv-body .gloss{margin:0;padding-top:8px;display:block}
 @media (prefers-reduced-motion:reduce){.rv-body,.step-body,.rv-plus{transition:none}}
 
-/* Things you might ask */
-.asks{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0}
-.asks-in{display:flex;align-items:baseline;gap:18px 40px;flex-wrap:wrap}
-.asks-label{font-size:14px;color:var(--ink-3);white-space:nowrap}
-.asks ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 28px}
-.asks q{font-family:var(--serif);font-size:clamp(18px,1.45vw,20px);color:var(--ink);quotes:"\201C" "\201D"}
-
 /* Section rhythm */
 .section{padding:clamp(56px,7.5vw,104px) 0}
 .section + .section{padding-top:0}
@@ -135,8 +133,10 @@ p{margin:0}
 .compare .us li{color:var(--ink)}
 
 /* Teaching */
-.teach-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:start}
-.steps{margin-top:40px;border-top:1px solid var(--ink)}
+.teach-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:start;margin-top:clamp(28px,4vw,48px)}
+.teach-head h2{max-width:15em}
+.teach-head .intro{margin-top:22px}
+.steps{margin-top:0;border-top:1px solid var(--ink)}
 .step{display:grid;grid-template-columns:34px 1fr;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:22px 0;cursor:pointer;color:var(--ink);font-family:var(--sans)}
 .step .ring{width:26px;height:26px;margin-top:6px;color:var(--line-2);transition:color .2s}
 .step-name{font-family:var(--serif);font-size:30px;line-height:1.1;display:block}
@@ -301,17 +301,18 @@ p{margin:0}
   .menu.is-open{display:flex;flex-direction:column;gap:4px;position:absolute;left:0;right:0;top:var(--nav-h);background:var(--paper);border-bottom:1px solid var(--line);padding:12px var(--gutter) 20px}
   .menu.is-open a{padding:10px 0;font-size:18px}
   .hero-in{grid-template-columns:1fr;min-height:0}
-  .hero-copy{padding:20px 0 0;order:3}
-  .hero-fig{order:1}
+  .hero-copy{padding:8px 0 28px;order:1}
+  .hero-fig{order:2}
   .hero-fig img{max-height:62vh}
-  .facts{order:2;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 16px;margin-top:-7px;padding-top:16px}
-  .hero-copy{order:3}
+  .floor{order:3}
+  .facts{order:4;grid-column:1;padding-top:14px;grid-template-columns:1fr;gap:6px}
+  .asks{order:5;grid-column:1;padding-top:22px}
   .compare{grid-template-columns:1fr;gap:40px}
   .teach-in{grid-template-columns:1fr;gap:8px}
   .stage{order:-1;position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));z-index:2;background:var(--paper);padding:8px 0 10px;border-bottom:1px solid var(--line)}
   .stage-img{width:min(100%,calc(30vh * 1.816))}
   .stage-line{min-height:52px;font-size:18px}
-  .teach-copy{padding-top:24px}
+  .teach-copy{padding-top:16px}
   .anatomy{grid-template-columns:1fr;gap:32px}
   .anatomy-fig{max-width:360px;margin:0 auto}
   .details{grid-template-columns:repeat(2,1fr)}
@@ -373,22 +374,20 @@ p{margin:0}
     <figure class="hero-fig">
       <img src="img/hero.webp" width="1000" height="1040" alt="AhaRo: a slim wheeled base, a tall column carrying two small arms with grippers, and a camera head on top. One arm reaches forward." fetchpriority="high">
     </figure>
+    <div class="floor" aria-hidden="true"></div>
+    <div class="asks" aria-label="You might ask">
+      <span class="asks-label">You might ask</span>
+      <ul>
+        <li><q>Bring me my glasses.</q></li>
+        <li><q>I spilled my tea. Can you help?</q></li>
+        <li><q>Where did I put the remote?</q></li>
+        <li><q>Did I take my pills today?</q></li>
+      </ul>
+    </div>
     <ul class="facts" aria-label="At a glance">
-      <li>A little bigger than a robot vacuum</li>
+      <li>A little bigger than a robot vacuum cleaner</li>
       <li>Weighs less than a toddler</li>
-      <li>Developed in Vienna by Intellectus Agens</li>
-    </ul>
-  </div>
-</section>
-
-<section class="asks" aria-label="You might ask">
-  <div class="wrap asks-in">
-    <span class="asks-label">You might ask</span>
-    <ul>
-      <li><q>Bring me my glasses.</q></li>
-      <li><q>I spilled my tea. Can you help?</q></li>
-      <li><q>Where did I put the remote?</q></li>
-      <li><q>Did I take my pills?</q></li>
+      <li>Developed in Europe by Intellectus Agens</li>
     </ul>
   </div>
 </section>
@@ -423,10 +422,12 @@ p{margin:0}
 </section>
 
 <section class="section teach" id="teaching">
+  <div class="wrap teach-head">
+    <h2>Show it once.</h2>
+    <p class="intro">All in plain language: no app, nothing to program. You talk to AhaRo as you would to a helper, and it talks back. Teaching is not setup. It is everyday use, and it gets shorter each time.</p>
+  </div>
   <div class="wrap teach-in">
     <div class="teach-copy">
-      <h2>Show it once.</h2>
-      <p class="intro">All in plain language: no app, nothing to program. You talk to AhaRo as you would to a helper, and it talks back. Teaching is not setup. It is everyday use, and it gets shorter each time.</p>
       <div class="steps" id="steps">
         <button class="step" type="button" aria-pressed="true" data-step="show">
           <svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/></svg>
@@ -520,7 +521,7 @@ p{margin:0}
           <li class="rv"><button class="rv-head" type="button" aria-expanded="false"><q>I am back from my walk. Something cold to drink, out on the balcony.</q><span class="rv-plus" aria-hidden="true"></span></button><div class="rv-body"><span class="how">open the fridge, pick up the juice, open the balcony door, bring it out</span></div></li>
           <li class="rv"><button class="rv-head" type="button" aria-expanded="false"><q>Clear the table, then go and charge.</q><span class="rv-plus" aria-hidden="true"></span></button><div class="rv-body"><span class="how">pick up the cups, place them by the sink, dock</span></div></li>
           <li class="rv"><button class="rv-head" type="button" aria-expanded="false"><q>Where did I put the remote?</q><span class="rv-plus" aria-hidden="true"></span></button><div class="rv-body"><span class="how">find it where it saw it last, pick it up, bring it</span></div></li>
-          <li class="rv"><button class="rv-head" type="button" aria-expanded="false"><q>Did I take my pills?</q><span class="rv-plus" aria-hidden="true"></span></button><div class="rv-body"><span class="how">checks what it saw this morning and answers. And at 13:00, unasked: opens the drawer, picks up the pills, brings them to you</span></div></li>
+          <li class="rv"><button class="rv-head" type="button" aria-expanded="false"><q>Did I take my pills today?</q><span class="rv-plus" aria-hidden="true"></span></button><div class="rv-body"><span class="how">checks what it saw this morning and answers. And at 13:00, unasked: opens the drawer, picks up the pills, brings them to you</span></div></li>
         </ul>
       </div>
     </div>
